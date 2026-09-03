@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Итоги SUMMER SALE 2026 · Planta Rosa</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F7F5F2;--card:#FFFFFF;--accent:#F97316;--accent2:#1A1A1A;--text:#1A1A1A;
+  --muted:#8A8A8A;--border:#E8E4DF;--green:#22C55E;--light-accent:#FFF0E6;
+}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);font-size:13px;padding:20px;min-height:100vh}
+.dashboard{display:grid;grid-template-columns:210px 1fr;gap:18px;max-width:1240px;margin:0 auto}
+
+/* Sidebar */
+.sidebar{display:flex;flex-direction:column;gap:6px;position:sticky;top:20px;align-self:start;height:calc(100vh - 40px)}
+.logo{font-size:16px;font-weight:800;letter-spacing:-0.5px;padding:4px 0 18px}
+.logo span{color:var(--accent)}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:600;color:var(--muted);transition:all .2s;text-decoration:none;font-size:12.5px}
+.nav-item:hover{background:#F0EDE9;color:var(--text)}
+.nav-item.active{background:var(--accent2);color:#fff}
+.nav-num{width:20px;height:20px;flex:0 0 20px;border-radius:6px;background:#EDE9E3;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.nav-item.active .nav-num{background:var(--accent);color:#fff}
+.sidebar-bottom{margin-top:auto;padding-top:12px;border-top:1px solid var(--border)}
+.date-chip{background:var(--light-accent);color:#C2410C;border-radius:10px;padding:10px 12px;font-weight:700;font-size:12px;text-align:center;margin-bottom:10px}
+.user-block{display:flex;align-items:center;gap:10px;padding:6px 0}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F97316,#EA580C);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0}
+.user-name{font-weight:700;font-size:12px}.user-role{font-size:11px;color:var(--muted)}
+
+/* Main */
+.main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.greeting small{color:var(--muted);font-size:12px;font-weight:600}
+.greeting h1{font-size:27px;font-weight:800;letter-spacing:-1px;margin-top:2px}
+.date-badge{background:var(--accent2);color:#fff;padding:9px 15px;border-radius:10px;font-size:12px;font-weight:700}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.pill{background:#fff;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.pill b{color:var(--accent)}
+
+/* Section head */
+.sec{scroll-margin-top:20px}
+.sec-head{display:flex;align-items:center;gap:10px;margin:8px 2px 2px}
+.sec-badge{width:26px;height:26px;border-radius:8px;background:var(--accent2);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.sec-head h2{font-size:18px;font-weight:800;letter-spacing:-.4px}
+.sec-head .cap{margin-left:auto;color:var(--muted);font-size:11.5px;font-weight:600}
+
+/* KPI */
+.kpi-row{display:grid;gap:10px}
+.k3{grid-template-columns:repeat(3,1fr)}.k4{grid-template-columns:repeat(4,1fr)}
+.kpi{background:var(--card);border-radius:14px;padding:14px 16px;border:1px solid var(--border)}
+.kpi-val{font-size:23px;font-weight:800;letter-spacing:-0.5px}
+.kpi-val small{font-size:13px;font-weight:700;color:var(--muted)}
+.kpi-label{color:var(--muted);font-size:11px;margin-top:3px;font-weight:600}
+.kpi-change{font-size:11px;font-weight:700;margin-top:6px}
+.up{color:var(--green)}.dn{color:#EF4444}.nt{color:var(--muted)}
+
+/* Cards */
+.card{background:var(--card);border-radius:16px;padding:16px;border:1px solid var(--border)}
+.card-title{font-weight:800;font-size:13.5px;margin-bottom:3px}
+.card-sub{color:var(--muted);font-size:11px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2b{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+
+/* Donut */
+.donut-wrap{display:flex;align-items:center;gap:20px;margin-top:12px}
+.donut-legend{display:flex;flex-direction:column;gap:8px;flex:1}
+.legend-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.legend-name{color:var(--text);font-size:11.5px;font-weight:600;flex:1}
+.legend-pct{font-weight:800;font-size:12px}
+
+/* horizontal bars */
+.hbar{display:grid;grid-template-columns:96px 1fr 64px;align-items:center;gap:9px;margin:7px 0;font-size:11.5px}
+.hbar .hn{font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.htrack{height:14px;background:#F0EDE9;border-radius:7px;overflow:hidden}
+.hfill{height:100%;border-radius:7px}
+.hbar .hv{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* big number / accent */
+.big-num{font-size:32px;font-weight:800;letter-spacing:-1px;margin:8px 0 4px}
+.accent-card{background:var(--accent);color:#fff;border-color:transparent}
+.accent-card .card-sub{color:rgba(255,255,255,.75)}.accent-card .big-num{color:#fff}
+.dark-card{background:#1A1A1A;border-color:#1A1A1A;color:#fff}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;margin-top:10px}
+.tbl th{text-align:left;font-size:10px;font-weight:700;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px}
+.tbl td{padding:8px;border-bottom:1px solid var(--border);font-size:11.5px;font-weight:500}
+.tbl td.r,.tbl th.r{text-align:right}
+.tbl tr:last-child td{border:none}.tbl tr:hover td{background:#F9F7F5}
+.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700}
+.badge-green{background:#DCFCE7;color:#166534}.badge-orange{background:#FFF0E6;color:#C2410C}
+.badge-blue{background:#DBEAFE;color:#1E40AF}.badge-gray{background:#F3F4F6;color:#4B5563}
+.badge-red{background:#FEE2E2;color:#B91C1C}
+
+/* activity / progress */
+.activity-list{display:flex;flex-direction:column;gap:11px;margin-top:12px}
+.act-item{display:flex;align-items:center;gap:10px}
+.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.act-city{font-size:12px;font-weight:700}
+.act-bar{flex:1;height:4px;background:var(--border);border-radius:2px;position:relative;min-width:40px}
+.act-fill{height:100%;border-radius:2px;background:var(--accent)}
+.act-count{font-size:11px;color:var(--muted);font-weight:700;min-width:40px;text-align:right}
+.prog-item{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.prog-header{display:flex;justify-content:space-between}.prog-name{font-size:11px;font-weight:600}
+.prog-val{font-size:11px;font-weight:800;color:var(--accent)}
+.prog-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px}
+
+.miss{background:#FFF8EE;border:1px dashed #E9C983;color:#946a17;border-radius:12px;padding:11px 14px;font-size:11.5px;font-weight:600}
+.note{font-size:10.5px;color:var(--muted);margin-top:8px}
+.todo{display:flex;gap:10px;align-items:flex-start;background:#FCFBF9;border:1px solid var(--border);border-radius:12px;padding:11px 13px;font-size:12px}
+.todo .tn{width:20px;height:20px;flex:0 0 20px;border-radius:6px;background:var(--accent);color:#fff;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+
+@media(max-width:900px){
+  body{padding:12px}
+  .dashboard{grid-template-columns:1fr;gap:12px}
+  .sidebar{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}
+  .sidebar-bottom{display:none}.logo{width:100%;padding-bottom:6px}
+  .nav-item{padding:7px 10px}
+  .k4,.k3{grid-template-columns:repeat(2,1fr)}
+  .grid2,.grid2b{grid-template-columns:1fr}
+  .hbar{grid-template-columns:84px 1fr 56px}
+}
+</style>
+</head>
+<body>
+<div class="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">Planta Rosa <span>Online</span></div>
+    <a href="#s1" class="nav-item active"><span class="nav-num">1</span>Обзор</a>
+    <a href="#s2" class="nav-item"><span class="nav-num">2</span>География</a>
+    <a href="#s3" class="nav-item"><span class="nav-num">3</span>Клиенты</a>
+    <a href="#s4" class="nav-item"><span class="nav-num">4</span>Ошибки Sale</a>
+    <a href="#s5" class="nav-item"><span class="nav-num">5</span>Задачи</a>
+    <a href="#s6" class="nav-item"><span class="nav-num">6</span>Товары</a>
+    <div class="sidebar-bottom">
+      <div class="date-chip">SUMMER SALE 2026</div>
+      <div class="user-block"><div class="avatar">АН</div><div><div class="user-name">Аналитика</div><div class="user-role">03.09.2026</div></div></div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="header">
+      <div class="greeting">
+        <small>Итоги распродажи</small>
+        <h1>SUMMER SEASON SALE 2026</h1>
+        <div class="pills">
+          <span class="pill"><b>VIP</b> 10.08</span><span class="pill"><b>App</b> 12.08</span>
+          <span class="pill"><b>Все</b> 14.08</span><span class="pill"><b>SMS</b> 15·25.08</span>
+          <span class="pill"><b>−20%</b> 22.08</span><span class="pill"><b>Спящие −30%</b> 30.08</span>
+          <span class="pill"><b>Last Call</b> 31.08</span>
+        </div>
+      </div>
+      <div class="date-badge">10 – 31.08.2026</div>
+    </div>
+
+    <!-- ===== 1. ОБЗОР ===== -->
+    <section class="sec" id="s1">
+      <div class="sec-head"><span class="sec-badge">1</span><h2>Общая аналитика</h2><span class="cap">весь период · 22 дня</span></div>
+      <div class="kpi-row k3">
+        <div class="kpi"><div class="kpi-val">12 154</div><div class="kpi-label">Оплаченные заказы</div><div class="kpi-change up">↑ +264% к 2025 (объём)</div></div>
+        <div class="kpi"><div class="kpi-val">204,5 <small>млн ₽</small></div><div class="kpi-label">Выручка (без учёта возвратов)</div><div class="kpi-change up">↑ +209% к 2025 (объём) · было 66,2М</div><div class="kpi-change nt" style="margin-top:2px">с возвратами (на 03.09) — 183,0 млн ₽</div></div>
+        <div class="kpi"><div class="kpi-val">21 541 <small>шт</small></div><div class="kpi-label">Товаров продано</div><div class="kpi-change up">↑ +316% к 2025 (объём) · было 5 174</div><div class="kpi-change nt" style="margin-top:2px">SALE — 19 173 (94%)</div></div>
+      </div>
+      <div class="kpi-row k3" style="margin-top:10px">
+        <div class="kpi"><div class="kpi-val">67%</div><div class="kpi-label">% оплат (выкуп)</div><div class="kpi-change dn">↓ треть корзин без оплаты</div></div>
+        <div class="kpi"><div class="kpi-val">16 823 <small>₽</small></div><div class="kpi-label">Средний чек</div><div class="kpi-change dn">↓ −24% (глубже скидки)</div></div>
+        <div class="kpi"><div class="kpi-val">1,68</div><div class="kpi-label">UPT (товаров в заказе)</div><div class="kpi-change up">↑ +0,13 к 2025</div></div>
+      </div>
+
+      <div class="grid2b" style="margin-top:14px">
+        <div class="card">
+          <div class="card-title">Сравнение с 2025 годом</div>
+          <div class="card-sub">итоги за весь сейл каждого года</div>
+          <table class="tbl">
+            <thead><tr><th>Показатель</th><th class="r">SALE 2025</th><th class="r">SALE 2026</th><th class="r">Δ к 2025</th></tr></thead>
+            <tbody>
+              <tr><td>Заказы</td><td class="r">3 338</td><td class="r">12 154</td><td class="r"><span class="badge badge-green">+106%</span></td></tr>
+              <tr><td>Выручка</td><td class="r">66,2М</td><td class="r">204,5М</td><td class="r"><span class="badge badge-green">+57%</span></td></tr>
+              <tr><td>Ср. чек</td><td class="r">19 835</td><td class="r">16 823</td><td class="r"><span class="badge badge-red">−24%</span></td></tr>
+              <tr><td>UPT</td><td class="r">1,55</td><td class="r">1,68</td><td class="r"><span class="badge badge-green">+12%</span></td></tr>
+              <tr><td>SellOut</td><td class="r">52,3%</td><td class="r">71,6%</td><td class="r"><span class="badge badge-green">+19пп</span></td></tr>
+              <tr><td>% возврата</td><td class="r">7%</td><td class="r">12%</td><td class="r"><span class="badge badge-orange">+5пп</span></td></tr>
+            </tbody>
+          </table>
+          <div class="note">Сейл 2026 длился дольше (22 дня против 11 в 2025), поэтому абсолютные заказы/выручка выросли кратно. Δ по заказам, выручке и ср. чеку приведён к <b>сопоставимым 11 дням</b> (21–31.08): за них 2026 дал 6 867 заказов и 103,6 млн ₽. SellOut, UPT и % возврата — за весь сейл.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <div class="card-title">Доля приложения IMSHOP</div>
+            <div class="card-sub">по оплаченным заказам</div>
+            <div class="donut-wrap" style="justify-content:center;margin-top:8px">
+              <svg width="118" height="118" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="42" fill="none" stroke="#F0EDE9" stroke-width="18"/>
+                <circle cx="60" cy="60" r="42" fill="none" stroke="#F97316" stroke-width="18" stroke-dasharray="172.9 90.9" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+                <text x="60" y="56" text-anchor="middle" font-family="Manrope" font-size="17" font-weight="800" fill="#1A1A1A">65,5%</text>
+                <text x="60" y="72" text-anchor="middle" font-family="Manrope" font-size="9" fill="#8A8A8A">приложение</text>
+              </svg>
+            </div>
+            <div class="donut-legend" style="margin-top:6px">
+              <div class="legend-row"><span class="legend-dot" style="background:#F97316"></span><span class="legend-name">IMSHOP</span><span class="legend-pct" style="color:#F97316">7 955</span></div>
+              <div class="legend-row"><span class="legend-dot" style="background:#E8E4DF"></span><span class="legend-name">Сайт / прочее</span><span class="legend-pct">4 199</span></div>
+            </div>
+          </div>
+          <div class="card accent-card">
+            <div class="card-sub">SellOut — распродано склада</div>
+            <div class="big-num">71,6%</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.85);font-weight:500">19 173 из 26 775 SALE-товаров · +19 п.п. к 2025 (52,3%)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. ГЕОГРАФИЯ ===== -->
+    <section class="sec" id="s2">
+      <div class="sec-head"><span class="sec-badge">2</span><h2>География заказов</h2><span class="cap">оплаченные заказы</span></div>
+      <div class="kpi-row k4">
+        <div class="kpi"><div class="kpi-val">82</div><div class="kpi-label">Региона России</div><div class="kpi-change up">↑ +10 к 2025 (было 72)</div></div>
+        <div class="kpi"><div class="kpi-val">304</div><div class="kpi-label">Городов</div><div class="kpi-change up">↑ +73 к 2025 (было 231)</div></div>
+        <div class="kpi"><div class="kpi-val">57%</div><div class="kpi-label">Доля Москвы (заказы)</div><div class="kpi-change nt">≈ как в 2025 (56,9%)</div></div>
+        <div class="kpi"><div class="kpi-val">71%</div><div class="kpi-label">Топ-3 региона</div><div class="kpi-change nt">≈ 72% в 2025</div></div>
+      </div>
+
+      <div class="grid2" style="margin-top:14px">
+        <div class="card">
+          <div class="card-title">Доля регионов</div><div class="card-sub">по количеству заказов</div>
+          <div class="donut-wrap">
+            <svg width="108" height="108" viewBox="0 0 100 100" id="regDonut"></svg>
+            <div class="donut-legend" id="regLegend"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Топ городов по заказам</div><div class="card-sub">оплаченные заказы</div>
+          <div id="cityBars" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <div class="grid2b" style="margin-top:14px">
+        <div class="card">
+          <div class="card-title">Топ-10 городов — детализация</div><div class="card-sub">оплаченные заказы</div>
+          <table class="tbl">
+            <thead><tr><th>#</th><th>Город</th><th>Регион</th><th class="r">Заказов</th><th class="r">Доля</th><th>Статус</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><b>Москва</b></td><td>Москва</td><td class="r"><b>6 918</b></td><td class="r">56,9%</td><td><span class="badge badge-orange">Лидер</span></td></tr>
+              <tr><td>2</td><td>Санкт-Петербург</td><td>СПб</td><td class="r">731</td><td class="r">6,0%</td><td><span class="badge badge-green">Топ</span></td></tr>
+              <tr><td>3</td><td>Махачкала</td><td>Дагестан</td><td class="r">390</td><td class="r">3,2%</td><td><span class="badge badge-blue">Активный</span></td></tr>
+              <tr><td>4</td><td>Владикавказ</td><td>С. Осетия</td><td class="r">263</td><td class="r">2,2%</td><td><span class="badge badge-blue">Активный</span></td></tr>
+              <tr><td>5</td><td>Сочи</td><td>Краснодарский кр.</td><td class="r">187</td><td class="r">1,5%</td><td><span class="badge badge-gray">Средний</span></td></tr>
+              <tr><td>6</td><td>Ростов-на-Дону</td><td>Ростовская обл.</td><td class="r">173</td><td class="r">1,4%</td><td><span class="badge badge-gray">Средний</span></td></tr>
+              <tr><td>7</td><td>Краснодар</td><td>Краснодарский кр.</td><td class="r">132</td><td class="r">1,1%</td><td><span class="badge badge-gray">Средний</span></td></tr>
+              <tr><td>8</td><td>Казань</td><td>Татарстан</td><td class="r">115</td><td class="r">0,9%</td><td><span class="badge badge-gray">Средний</span></td></tr>
+              <tr><td>9</td><td>Красногорск</td><td>Московская обл.</td><td class="r">115</td><td class="r">0,9%</td><td><span class="badge badge-gray">Средний</span></td></tr>
+              <tr><td>10</td><td>Одинцово</td><td>Московская обл.</td><td class="r">104</td><td class="r">0,9%</td><td><span class="badge badge-gray">Средний</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <div class="card-title">Концентрация юга</div><div class="card-sub">южные регионы вместе</div>
+            <div class="prog-item"><div class="prog-header"><span class="prog-name">Дагестан</span><span class="prog-val">4,3%</span></div><div class="prog-track"><div class="prog-fill" style="width:43%;background:#F97316"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><span class="prog-name">Краснодарский кр.</span><span class="prog-val">3,3%</span></div><div class="prog-track"><div class="prog-fill" style="width:33%;background:#FBBF24"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><span class="prog-name">Сев. Осетия</span><span class="prog-val">2,3%</span></div><div class="prog-track"><div class="prog-fill" style="width:23%;background:#34D399"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><span class="prog-name">Ростовская обл.</span><span class="prog-val">1,4%</span></div><div class="prog-track"><div class="prog-fill" style="width:14%;background:#60A5FA"></div></div></div>
+            <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--muted);font-weight:600">Итого юг:</span><span style="font-size:16px;font-weight:800;color:var(--accent)">13,5%</span></div>
+          </div>
+          <div class="card dark-card">
+            <div style="font-size:10.5px;color:rgba(255,255,255,.5);font-weight:700;margin-bottom:6px">ГЛАВНЫЙ ИНСАЙТ</div>
+            <div style="font-size:12.5px;font-weight:600;line-height:1.6;color:rgba(255,255,255,.92)">Топ-3 региона дают <span style="color:#F97316;font-weight:800">71%</span> заказов. Остальные 29% — по 79 регионам страны.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">Карта заказов по стране</div><div class="card-sub">схематично · размер точки — число заказов · линии к Москве-хабу</div>
+        <div style="width:100%;overflow-x:auto"><svg id="ruMap" viewBox="0 0 1000 520" style="width:100%;min-width:640px;height:auto;display:block;margin-top:8px"></svg></div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">Сравнение географии с 2025</div><div class="card-sub">доля региона по заказам · период сейла (2025: 21–31.08 · 2026: 10–31.08)</div>
+        <div class="grid2" style="margin-top:6px">
+          <table class="tbl">
+            <thead><tr><th>Регион</th><th class="r">2025</th><th class="r">2026</th><th class="r">Δ</th></tr></thead>
+            <tbody>
+              <tr><td>Москва</td><td class="r">56,9%</td><td class="r">57,1%</td><td class="r"><span class="badge badge-gray">≈</span></td></tr>
+              <tr><td>Московская обл.</td><td class="r">7,5%</td><td class="r">7,3%</td><td class="r"><span class="badge badge-gray">≈</span></td></tr>
+              <tr><td>Санкт-Петербург</td><td class="r">7,3%</td><td class="r">6,3%</td><td class="r"><span class="badge badge-red">−1,0</span></td></tr>
+              <tr><td>Респ. Дагестан</td><td class="r">2,4%</td><td class="r">4,3%</td><td class="r"><span class="badge badge-green">+1,9</span></td></tr>
+              <tr><td>Краснодарский кр.</td><td class="r">3,4%</td><td class="r">3,3%</td><td class="r"><span class="badge badge-gray">≈</span></td></tr>
+              <tr><td>Ростовская обл.</td><td class="r">2,5%</td><td class="r">1,8%</td><td class="r"><span class="badge badge-red">−0,7</span></td></tr>
+            </tbody>
+          </table>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="grid2" style="gap:10px">
+              <div class="kpi"><div class="kpi-val">72→82</div><div class="kpi-label">Регионов</div><div class="kpi-change up">↑ +10</div></div>
+              <div class="kpi"><div class="kpi-val">231→304</div><div class="kpi-label">Городов</div><div class="kpi-change up">↑ +73</div></div>
+            </div>
+            <div class="card dark-card" style="padding:13px"><div style="font-size:10.5px;color:rgba(255,255,255,.5);font-weight:700;margin-bottom:5px">ВЫВОД</div><div style="font-size:12px;font-weight:600;line-height:1.55;color:rgba(255,255,255,.92)">Структура стабильна: Москва ~57% оба года. Заметно вырос <span style="color:#F97316;font-weight:800">Дагестан</span> (2,4%→4,3%), охват стал шире: 139 новых городов, вышли в <b>Беларусь и Казахстан</b>.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">Новые города — которых не было в сейл 2025</div><div class="card-sub">139 новых городов · топ по числу заказов 2026</div>
+        <div class="grid2" style="margin-top:6px">
+          <div id="newCityBars"></div>
+          <table class="tbl" style="margin-top:0">
+            <thead><tr><th>Город</th><th>Регион</th><th class="r">Зак.</th></tr></thead>
+            <tbody>
+              <tr><td><b>Минск</b> 🇧🇾</td><td>Беларусь</td><td class="r">19</td></tr>
+              <tr><td>Раменское</td><td>Московская обл.</td><td class="r">12</td></tr>
+              <tr><td>Кисловодск</td><td>Ставропольский кр.</td><td class="r">9</td></tr>
+              <tr><td>Рыбинск</td><td>Ярославская обл.</td><td class="r">8</td></tr>
+              <tr><td>Магас</td><td>Ингушетия</td><td class="r">7</td></tr>
+              <tr><td>Новочеркасск</td><td>Ростовская обл.</td><td class="r">7</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">Новые рынки за год: <b>Беларусь</b> (Минск, Гомель, Гродно) и <b>Казахстан</b> (Астана), а также Магадан, Псков, Респ. Алтай и Коми, Ингушетия.</div>
+      </div>
+    </section>
+
+    <!-- ===== 3. КЛИЕНТЫ ===== -->
+    <section class="sec" id="s3">
+      <div class="sec-head"><span class="sec-badge">3</span><h2>Клиенты</h2><span class="cap">покупатели и рассылки</span></div>
+      <div class="kpi-row k4">
+        <div class="kpi"><div class="kpi-val">8 805</div><div class="kpi-label">Клиентов купили</div><div class="kpi-change up">↑ +173% (2025: 3 220)</div></div>
+        <div class="kpi"><div class="kpi-val">1,38</div><div class="kpi-label">Заказов на клиента</div><div class="kpi-change up">↑ 2025: 1,17</div></div>
+        <div class="kpi"><div class="kpi-val">23 222 <small>₽</small></div><div class="kpi-label">Средний чек на клиента</div><div class="kpi-change up">↑ 2025: 20 565 ₽</div></div>
+        <div class="kpi"><div class="kpi-val">1,68</div><div class="kpi-label">UPT</div><div class="kpi-change up">↑ 2025: 1,55</div></div>
+      </div>
+      <div class="grid2b" style="margin-top:14px">
+        <div class="card">
+          <div class="card-title">Как отработали SMS-рассылки</div><div class="card-sub">купили = все статусы кроме неоплаченных/отменённых</div>
+          <table class="tbl">
+            <thead><tr><th>Рассылка</th><th class="r">Отпр.</th><th class="r">Затраты</th><th class="r">Купили</th><th class="r">Конв.</th><th class="r">Выручка</th><th class="r">ROAS</th></tr></thead>
+            <tbody>
+              <tr><td>SMS-1 · старт (14.08)</td><td class="r">17 037</td><td class="r">270к</td><td class="r">775</td><td class="r">4,5%</td><td class="r">17,7М</td><td class="r"><span class="badge badge-green">65×</span></td></tr>
+              <tr><td>SMS-2 · −20% (25.08)</td><td class="r">24 564</td><td class="r">170к</td><td class="r">673</td><td class="r">2,7%</td><td class="r">11,2М</td><td class="r"><span class="badge badge-green">66×</span></td></tr>
+              <tr><td>SMS-3 · спящие −30% (30.08)</td><td class="r">2 339</td><td class="r">23к</td><td class="r">57</td><td class="r">2,4%</td><td class="r">0,8М</td><td class="r"><span class="badge badge-green">34×</span></td></tr>
+              <tr style="font-weight:800"><td>Итого</td><td class="r">43 940</td><td class="r">463к</td><td class="r">~1505</td><td class="r">3,4%</td><td class="r">29,7М</td><td class="r"><span class="badge badge-green">64×</span></td></tr>
+            </tbody>
+          </table>
+          <div class="card" style="margin-top:12px;background:#FCFBF9">
+            <div class="card-title">Причины возвратов</div><div class="card-sub">% от суммы возвратов · август 2026 (23,4 млн ₽)</div>
+            <div id="reasonBars" style="margin-top:10px"></div>
+            <div class="note">«По желанию клиента» — 94% возвратов, и внутри неё подавляющее большинство — <b>не подошёл размер</b>. Вина магазина (брак, нет в наличии, фото≠товар) — всего 1,3%.</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card accent-card">
+            <div class="card-sub">Спящие клиенты — второе касание</div>
+            <div class="big-num">57</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.85);font-weight:500">спящих вернулись и купили по −30%. Из тех, кто ранее получал ещё и −20%, купили <b>37 чел. на 564 343 ₽</b> — конверсия ×2.</div>
+          </div>
+          <div class="card dark-card">
+            <div class="card-sub" style="color:rgba(255,255,255,.6);font-weight:700">ГЛАВНАЯ ПРИЧИНА ВОЗВРАТОВ</div>
+            <div class="big-num" style="color:#F97316">81,7%</div>
+            <div style="font-size:11.5px;color:rgba(255,255,255,.9);font-weight:500">суммы возвратов — «не подошёл размер». Прямой сигнал: нужна точная размерная сетка, фото на модели с параметрами и подсказки по размеру в карточке.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. ОШИБКИ ===== -->
+    <section class="sec" id="s4">
+      <div class="sec-head"><span class="sec-badge">4</span><h2>Ошибки Sale</h2><span class="cap">сбои, повлиявшие на клиентский путь и выручку</span></div>
+      <div class="kpi-row k4" style="margin-bottom:14px">
+        <div class="kpi"><div class="kpi-val">12%</div><div class="kpi-label">% возврата</div><div class="kpi-change dn">↓ +5 п.п. к 2025</div></div>
+        <div class="kpi"><div class="kpi-val">33%</div><div class="kpi-label">Заказов без оплаты</div><div class="kpi-change dn">↓ проблемы checkout</div></div>
+        <div class="kpi"><div class="kpi-val">RetailCRM</div><div class="kpi-label">Сбой синхронизации</div><div class="kpi-change dn">↓ товар не резервировался</div></div>
+        <div class="kpi"><div class="kpi-val">Method</div><div class="kpi-label">Пришлось отключить</div><div class="kpi-change dn">↓ деньги списывались без заказа</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card" style="background:#FCFBF9">
+          <div class="card-title">💳 Оплата</div>
+          <div class="activity-list">
+            <div class="act-item"><div class="act-dot" style="background:#F97316"></div><div><div class="act-city">Method отключили</div><div style="font-size:10.5px;color:var(--muted)">клиент оплачивал, но в CRM оплата не поступала; вылет на вводе карты</div></div></div>
+            <div class="act-item"><div class="act-dot" style="background:#F97316"></div><div><div class="act-city">Робокасса — сделали главной</div><div style="font-size:10.5px;color:var(--muted)">не приходил статус оплаты; не видим неоплаченные самооформленные заказы; нельзя скопировать ссылку на оплату</div></div></div>
+          </div>
+        </div>
+        <div class="card" style="background:#FCFBF9">
+          <div class="card-title">🖥 Сайт</div>
+          <div class="activity-list">
+            <div class="act-item"><div class="act-dot" style="background:#1A1A1A"></div><div><div class="act-city">Дубли карточек товаров</div><div style="font-size:10.5px;color:var(--muted)">периодически всплывают на сайте</div></div></div>
+            <div class="act-item"><div class="act-dot" style="background:#1A1A1A"></div><div><div class="act-city">Sale-цена → полная</div><div style="font-size:10.5px;color:var(--muted)">часть товаров появлялась с полной ценой</div></div></div>
+            <div class="act-item"><div class="act-dot" style="background:#1A1A1A"></div><div><div class="act-city">SoldOut-шильдик не удался</div><div style="font-size:10.5px;color:var(--muted)">при подключении все товары ушли в статус — отключили</div></div></div>
+            <div class="act-item"><div class="act-dot" style="background:#1A1A1A"></div><div><div class="act-city">Стрелка «назад»</div><div style="font-size:10.5px;color:var(--muted)">уводит в случайные места, а не откуда пришёл</div></div></div>
+          </div>
+        </div>
+        <div class="card" style="background:#FCFBF9">
+          <div class="card-title">📱 Приложение</div>
+          <div class="activity-list">
+            <div class="act-item"><div class="act-dot" style="background:#F97316"></div><div><div class="act-city">Закрытую ссылку сейла не запустить бесшовно</div><div style="font-size:10.5px;color:var(--muted)">риск ухода товаров в «показать всё» с новинками</div></div></div>
+            <div class="act-item"><div class="act-dot" style="background:#F97316"></div><div><div class="act-city">Sale-товары по полной цене</div><div style="font-size:10.5px;color:var(--muted)">в приложении отображались без скидки</div></div></div>
+            <div class="act-item"><div class="act-dot" style="background:#F97316"></div><div><div class="act-city">Фильтры перестали работать</div></div></div>
+          </div>
+        </div>
+        <div class="card" style="background:#FCFBF9">
+          <div class="card-title">📦 1С и склад (замедляют отгрузку)</div>
+          <div class="activity-list">
+            <div class="act-item"><div class="act-dot" style="background:#1A1A1A"></div><div><div class="act-city">Возврат без отправки пересоздаётся</div><div style="font-size:10.5px;color:var(--muted)">1С заново создаёт возврат → склад повторно ищет товары по конвейеру</div></div></div>
+            <div class="act-item"><div class="act-dot" style="background:#1A1A1A"></div><div><div class="act-city">Не все заказы прогрузились в 1С</div><div style="font-size:10.5px;color:var(--muted)">к моменту выгрузки закончились товары → не сформировалась цепочка</div></div></div>
+          </div>
+        </div>
+        <div class="card" style="background:#FCFBF9">
+          <div class="card-title">⚙️ RetailCRM</div>
+          <div class="activity-list">
+            <div class="act-item"><div class="act-dot" style="background:#F97316"></div><div><div class="act-city">Сбой синхронизации с 1С</div><div style="font-size:10.5px;color:var(--muted)">из-за сбоя RetailCRM заказы не прогружались в 1С → товар не резервировался под заказ</div></div></div>
+          </div>
+        </div>
+        <div class="card" style="background:#FCFBF9">
+          <div class="card-title">🌐 Инфраструктура</div>
+          <div class="activity-list">
+            <div class="act-item"><div class="act-dot" style="background:#1A1A1A"></div><div><div class="act-city">Селектел</div><div style="font-size:10.5px;color:var(--muted)">сильная зависимость сайта; частые техработы и аварии на их стороне</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. ЗАДАЧИ ===== -->
+    <section class="sec" id="s5">
+      <div class="sec-head"><span class="sec-badge">5</span><h2>Задачи для следующего Sale</h2><span class="cap">черновик</span></div>
+      <div class="card accent-card" style="margin-bottom:12px">
+        <div class="card-sub" style="font-weight:700">🔴 КРИТИЧНО К СЛЕДУЮЩЕМУ SALE</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:12.5px;font-weight:600">
+          <div>• Заранее связываться с Селектел, узнавать о технических работах</div>
+          <div>• Нагрузочное тестирование сайта и приложения перед стартом</div>
+          <div>• Убрать Method — у клиентов списываются деньги, а заказ остаётся без оплаты</div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="todo"><span class="tn">1</span><div><b>Кнопка отмены заказа</b> для клиента в личном кабинете.</div></div>
+          <div class="todo"><span class="tn">2</span><div><b>ТК и платёжные системы</b> — убедиться, что не будет техработ в период сейла.</div></div>
+          <div class="todo"><span class="tn">3</span><div><b>Сумма доставки в RetailCRM</b> должна учитываться сразу при ручном создании заказа.</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="todo"><span class="tn">4</span><div><b>Статус доставки СДЭК в приложении</b> — синхронизировать «Доставляется» и «Готов к выдаче».</div></div>
+          <div class="todo"><span class="tn">5</span><div><b>Размерная сетка.</b> 81,7% возвратов — «не подошёл размер». Точная таблица размеров, фото на модели с параметрами, подсказки в карточке.</div></div>
+          <div class="todo"><span class="tn">6</span><div><b>GTIN в мобильной RetailCRM.</b> Включить добавление товара по GTIN-коду (штрихкоду), когда сотрудник оформляет заказ в магазине.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. ТОВАРЫ ===== -->
+    <section class="sec" id="s6">
+      <div class="sec-head"><span class="sec-badge">6</span><h2>Аналитика по товарам</h2><span class="cap">категории · цвет · размер</span></div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Доля по категориям</div><div class="card-sub">в рублях</div>
+          <div class="donut-wrap">
+            <svg width="108" height="108" viewBox="0 0 100 100" id="catDonut"></svg>
+            <div class="donut-legend" id="catLegend"></div>
+          </div>
+          <div class="note">Верха доминируют — ~85% выручки.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Топ категорий по выручке</div><div class="card-sub">млн ₽</div>
+          <div id="catBars" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">Доли категорий — 2025 vs 2026</div><div class="card-sub">доля в штуках · только SALE-товары · классификация по артикулам</div>
+        <div class="grid2" style="margin-top:6px">
+          <table class="tbl">
+            <thead><tr><th>Группа</th><th class="r">2025</th><th class="r">2026</th><th class="r">Δ</th></tr></thead>
+            <tbody>
+              <tr><td>Верха</td><td class="r">83,5%</td><td class="r">85,6%</td><td class="r"><span class="badge badge-green">+2,1</span></td></tr>
+              <tr><td>Низы</td><td class="r">9,8%</td><td class="r">6,3%</td><td class="r"><span class="badge badge-red">−3,5</span></td></tr>
+              <tr><td>Детское</td><td class="r">0%</td><td class="r">5,1%</td><td class="r"><span class="badge badge-green">+5,1</span></td></tr>
+              <tr><td>Прочее</td><td class="r">6,7%</td><td class="r">2,9%</td><td class="r"><span class="badge badge-red">−3,8</span></td></tr>
+            </tbody>
+          </table>
+          <div class="card dark-card" style="padding:13px"><div style="font-size:10.5px;color:rgba(255,255,255,.5);font-weight:700;margin-bottom:5px">ВЫВОД</div><div style="font-size:12px;font-weight:600;line-height:1.55;color:rgba(255,255,255,.92)">Верха стабильно ~85%. Главное изменение — запустили <span style="color:#F97316;font-weight:800">детское</span> (0% → 5% штук в сейле). Низы просели (9,8% → 6,3%).</div></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">Топ цветов по количеству</div><div class="card-sub">извлечено из артикулов · распознано ≈80%</div>
+        <div id="colorBars" style="margin-top:12px"></div>
+        <div class="note">Часть «принтовых»/коллекционных названий (Эдем, Адреналин) идут отдельными позициями. Для точной палитры нужен справочник артикул→цвет.</div>
+      </div>
+      <div class="callout" style="margin-top:12px;background:#FFF0E6;border:1px solid #F7C9A8;border-radius:12px;padding:12px 15px;font-size:12.5px;color:#8a3f13;font-weight:600">📏 Размер — приоритет №1 по товарам: <b>81,7% возвратов</b> из-за того, что не подошёл размер (блок 3). Нужна точная размерная сетка и подсказки в карточке.</div>
+    </section>
+
+    <div style="text-align:center;color:var(--muted);font-size:11px;margin:14px 0 6px">Planta Rosa Online · итоги SUMMER SALE 2026 · собрано 03.09.2026 · источник: выгрузка заказов/товаров + автоотчёт</div>
+  </main>
+</div>
+
+<script>
+function fmt(n){return n.toLocaleString('ru-RU')}
+// donut on 100x100 r=38 sw=16, circ=238.76
+function donut(id,legId,data,fmtVal){
+  const svg=document.getElementById(id),leg=document.getElementById(legId),ns='http://www.w3.org/2000/svg';
+  const C=2*Math.PI*38,total=data.reduce((s,d)=>s+d.v,0);let off=0;
+  const base=document.createElementNS(ns,'circle');
+  base.setAttribute('cx',50);base.setAttribute('cy',50);base.setAttribute('r',38);base.setAttribute('fill','none');base.setAttribute('stroke','#F0EDE9');base.setAttribute('stroke-width',16);svg.appendChild(base);
+  data.forEach(d=>{const len=d.v/total*C;const c=document.createElementNS(ns,'circle');
+    c.setAttribute('cx',50);c.setAttribute('cy',50);c.setAttribute('r',38);c.setAttribute('fill','none');
+    c.setAttribute('stroke',d.c);c.setAttribute('stroke-width',16);c.setAttribute('stroke-dasharray',len.toFixed(2)+' '+(C-len).toFixed(2));
+    c.setAttribute('stroke-dashoffset',(-off).toFixed(2));c.setAttribute('transform','rotate(-90 50 50)');svg.appendChild(c);off+=len;
+    const r=document.createElement('div');r.className='legend-row';
+    r.innerHTML='<span class="legend-dot" style="background:'+d.c+'"></span><span class="legend-name">'+d.n+'</span><span class="legend-pct">'+(fmtVal?fmtVal(d.v,total):Math.round(d.v/total*100)+'%')+'</span>';leg.appendChild(r);});
+}
+function hbars(id,data,fmtVal){
+  const el=document.getElementById(id),max=Math.max(...data.map(d=>d.v));
+  data.forEach(d=>{const row=document.createElement('div');row.className='hbar';
+    row.innerHTML='<span class="hn" title="'+d.n+'">'+d.n+'</span><div class="htrack"><div class="hfill" style="width:'+(d.v/max*100)+'%;background:'+(d.c||'#F97316')+'"></div></div><span class="hv">'+(fmtVal?fmtVal(d.v):fmt(d.v))+'</span>';el.appendChild(row);});
+}
+donut('regDonut','regLegend',[
+ {n:'Москва',v:57.1,c:'#F97316'},{n:'Московская обл.',v:7.3,c:'#1A1A1A'},{n:'Санкт-Петербург',v:6.3,c:'#94A3B8'},
+ {n:'Дагестан',v:4.3,c:'#FBBF24'},{n:'Краснодарский кр.',v:3.3,c:'#34D399'},{n:'Прочие',v:21.7,c:'#60A5FA'}
+],v=>v.toFixed(1)+'%');
+hbars('cityBars',[
+ {n:'Москва',v:6918},{n:'Санкт-Петербург',v:731},{n:'Махачкала',v:390},{n:'Владикавказ',v:263},
+ {n:'Сочи',v:187},{n:'Ростов',v:173},{n:'Краснодар',v:132},{n:'Казань',v:115}
+]);
+hbars('newCityBars',[
+ {n:'Минск',v:19,c:'#F97316'},{n:'Раменское',v:12,c:'#FBBF24'},{n:'Кисловодск',v:9,c:'#94A3B8'},
+ {n:'Рыбинск',v:8,c:'#94A3B8'},{n:'Магас',v:7,c:'#94A3B8'},{n:'Новочеркасск',v:7,c:'#94A3B8'}
+]);
+hbars('reasonBars',[
+ {n:'Размер',v:81.7,c:'#F97316'},{n:'Фасон',v:8.6,c:'#FBBF24'},
+ {n:'Отмена',v:4.7,c:'#94A3B8'},{n:'Стиль',v:1.9,c:'#94A3B8'},
+ {n:'Вина магазина',v:1.3,c:'#EF4444'},{n:'Цвет',v:1.2,c:'#94A3B8'}
+],v=>v.toFixed(1)+'%');
+donut('catDonut','catLegend',[
+ {n:'Верха',v:85.5,c:'#F97316'},{n:'Низы',v:7.8,c:'#1A1A1A'},{n:'Прочее',v:3.5,c:'#94A3B8'},{n:'Детское',v:3.3,c:'#34D399'}
+],v=>v.toFixed(1)+'%');
+hbars('catBars',[
+ {n:'Худи-зип',v:53.1},{n:'Анораки',v:40.6},{n:'Футболки',v:30.2},{n:'Лонгсливы',v:16.6},
+ {n:'Свитшоты',v:15.2},{n:'Худи',v:7.1},{n:'Пэнтсы',v:5.0}
+],v=>v.toFixed(1)+'М');
+hbars('colorBars',[
+ {n:'Ванильный',v:4256,c:'#E8D9A8'},{n:'Серый',v:3098,c:'#9A938A'},{n:'Чёрный',v:2613,c:'#3A3633'},
+ {n:'Синий',v:973,c:'#60A5FA'},{n:'Бирюзовый',v:786,c:'#34D399'},{n:'Розовый',v:713,c:'#F9A8D4'},
+ {n:'Зелёный',v:675,c:'#5A8F3C'},{n:'Тёмно-синий',v:664,c:'#26407A'},{n:'Винный',v:522,c:'#9B2C3B'}
+]);
+// ---------- schematic Russia map ----------
+(function(){
+  const svg=document.getElementById('ruMap');if(!svg)return;const ns='http://www.w3.org/2000/svg';
+  const RU="M 5.8 325 L 57.8 260 L 86.7 143 L 150.3 182 L 173.4 156 L 289 117 L 416.2 52 L 705.2 91 L 878.6 117 L 994.2 182 L 924.9 208 L 849.7 260 L 820.8 325 L 832.4 377 L 716.8 442 L 653.2 481 L 589.6 403 L 491.3 390 L 404.6 403 L 346.8 351 L 242.8 377 L 185 390 L 167.6 455 L 167.6 487.5 L 150.3 481 L 127.2 478.4 L 109.8 442 L 98.3 442 L 92.5 390 L 75.1 364 L 75.1 325 L 52 318.5 L 14.5 327.6 Z";
+  const land=document.createElementNS(ns,'path');land.setAttribute('d',RU);
+  land.setAttribute('fill','#EFEBE4');land.setAttribute('stroke','#D9D2C7');land.setAttribute('stroke-width','1.5');svg.appendChild(land);
+  // lp = label placement (top/bottom/left/right) to avoid the crowded south cluster
+  const cities=[
+    {n:'Москва',x:113.3,y:315.2,o:6918,lp:'top'},{n:'СПб',x:71.1,y:260.8,o:731,lp:'top'},
+    {n:'Махачкала',x:170.5,y:481.3,o:390,lp:'right'},{n:'Владикавказ',x:154.2,y:480.7,o:263,lp:'bottom'},
+    {n:'Сочи',x:125.4,y:473.2,o:187,lp:'left'},{n:'Ростов',x:125.4,y:425.9,o:173,lp:'left'},
+    {n:'Краснодар',x:110,y:454.5,o:132,lp:'left'},{n:'Казань',x:179.8,y:314.6,o:115,lp:'top'},
+    {n:'Екатеринбург',x:246.2,y:301.1,o:70,lp:'top'},{n:'Самара',x:185.8,y:352,o:60,lp:'right'},
+    {n:'Новосибирск',x:375.1,y:324.6,o:45,lp:'bottom'},{n:'Владивосток',x:658.4,y:479.4,o:30,lp:'top'},
+    {n:'Калининград',x:14.5,y:322,o:25,lp:'right'}];
+  const msk=cities[0],mx=Math.max(...cities.map(c=>c.o));
+  cities.slice(1).forEach(c=>{const l=document.createElementNS(ns,'line');
+    l.setAttribute('x1',msk.x);l.setAttribute('y1',msk.y);l.setAttribute('x2',c.x);l.setAttribute('y2',c.y);
+    l.setAttribute('stroke','#F97316');l.setAttribute('stroke-width','0.8');l.setAttribute('stroke-opacity','0.30');l.setAttribute('stroke-dasharray','3 3');svg.appendChild(l);});
+  cities.forEach(c=>{const r=5+Math.sqrt(c.o/mx)*24;
+    const dot=document.createElementNS(ns,'circle');dot.setAttribute('cx',c.x);dot.setAttribute('cy',c.y);dot.setAttribute('r',r);
+    dot.setAttribute('fill','#F97316');dot.setAttribute('fill-opacity','0.55');dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','1.5');
+    const t=document.createElementNS(ns,'title');t.textContent=c.n+': '+c.o.toLocaleString('ru-RU')+' заказов';dot.appendChild(t);svg.appendChild(dot);
+    let lx=c.x,ly=c.y,anchor='middle';const pad=r+4;
+    if(c.lp==='top'){ly=c.y-pad-2;anchor='middle';}
+    else if(c.lp==='bottom'){ly=c.y+pad+9;anchor='middle';}
+    else if(c.lp==='left'){lx=c.x-pad;ly=c.y+3.5;anchor='end';}
+    else if(c.lp==='right'){lx=c.x+pad;ly=c.y+3.5;anchor='start';}
+    const lab=document.createElementNS(ns,'text');lab.setAttribute('x',lx);lab.setAttribute('y',ly);lab.setAttribute('text-anchor',anchor);
+    lab.setAttribute('font-family','Manrope');lab.setAttribute('font-size','12.5');lab.setAttribute('font-weight','700');lab.setAttribute('fill','#1A1A1A');
+    lab.setAttribute('stroke','#EFEBE4');lab.setAttribute('stroke-width','2.6');lab.setAttribute('paint-order','stroke');lab.textContent=c.n;svg.appendChild(lab);});
+})();
+// nav highlight
+const links=[...document.querySelectorAll('.nav-item')],secs=links.map(l=>document.querySelector(l.getAttribute('href')));
+window.addEventListener('scroll',()=>{let i=secs.length-1;for(let j=0;j<secs.length;j++){if(secs[j].getBoundingClientRect().top<120)i=j;}links.forEach(l=>l.classList.remove('active'));links[i].classList.add('active');});
+// animate progress
+setTimeout(()=>{document.querySelectorAll('.prog-fill,.act-fill').forEach(el=>{const w=el.style.width;el.style.width='0%';setTimeout(()=>el.style.width=w,80);});},200);
+</script>
+</body>
+</html>
