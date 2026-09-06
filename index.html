@@ -118,6 +118,21 @@ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);fon
 @keyframes pulsering{0%{transform:scale(1);opacity:.7}70%{transform:scale(2.4);opacity:0}100%{opacity:0}}
 .svgpop{transform-box:fill-box;transform-origin:center;animation:pop .5s both}
 .svgpulse{transform-box:fill-box;transform-origin:center;animation:pulsering 2.2s ease-out infinite}
+#cliStatusBars .hbar,#reactBars .hbar{grid-template-columns:126px 1fr 50px}
+.tree{display:grid;grid-template-columns:150px 216px 1fr;gap:10px 26px;align-items:center;margin-top:14px}
+.tn{border:1px solid var(--border);border-radius:12px;padding:10px 13px;background:#fff;position:relative}
+.tn .tv{font-size:18px;font-weight:800;letter-spacing:-.3px}
+.tn .tv small{font-size:12px;font-weight:800;color:var(--accent);margin-left:4px}
+.tn .tl{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;line-height:1.3}
+.tn.root{background:var(--accent2);color:#fff;text-align:center;align-self:center}
+.tn.root .tv small{color:#F97316}.tn.root .tl{color:rgba(255,255,255,.7)}
+.tn.bnew{border-left:4px solid #F97316}.tn.bold{border-left:4px solid #1A1A1A}
+.tn.leaf{background:#FCFBF9}
+.tree .p-root{grid-column:1;grid-row:1/5}
+.tree .g-new{grid-column:2;grid-row:1/3}.tree .g-old{grid-column:2;grid-row:3/5}
+.tree .lf1{grid-column:3;grid-row:1}.tree .lf2{grid-column:3;grid-row:2}
+.tree .lf3{grid-column:3;grid-row:3}.tree .lf4{grid-column:3;grid-row:4}
+.tn.conn::before{content:'';position:absolute;left:-26px;top:50%;width:26px;height:2px;background:#D8D2C8}
 .okr{cursor:pointer;transition:filter .15s}
 .okr:hover{filter:brightness(1.08)}
 @media(max-width:900px){
@@ -130,6 +145,10 @@ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);fon
   .grid2,.grid2b{grid-template-columns:1fr}
   .hbar{grid-template-columns:84px 1fr 56px}
   #artGrid,#soldoutGrid{grid-template-columns:repeat(2,1fr)!important}
+  .tree{grid-template-columns:1fr;gap:8px}
+  .tree>div{grid-column:1!important;grid-row:auto!important}
+  .tn.conn::before{display:none}
+  .tn.leaf{margin-left:18px}
 }
 </style>
 </head>
@@ -388,6 +407,49 @@ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);fon
           </div>
         </div>
       </div>
+
+      <div class="sec-head" style="margin-top:22px"><span class="sec-badge" style="background:var(--accent)">3.1</span><h2 style="font-size:16px">Клиенты сейла — структура и реактивация</h2><span class="cap">8 563 покупателя · по клиентской базе</span></div>
+      <div class="kpi-row k4">
+        <div class="kpi accent"><div class="kpi-val">8 563</div><div class="kpi-label">Покупателей сейла</div></div>
+        <div class="kpi"><div class="kpi-val">4 996</div><div class="kpi-label">Новых клиентов</div><div class="kpi-change up">58% покупателей сейла</div></div>
+        <div class="kpi"><div class="kpi-val">1 621</div><div class="kpi-label">Реактивировано спящих</div><div class="kpi-change up">19% — вернулись через сейл</div></div>
+        <div class="kpi"><div class="kpi-val">1 946</div><div class="kpi-label">Лояльных (активных)</div><div class="kpi-change nt">23% — покупают и вне сейла</div></div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">Из чего сложились 8 563 покупателя сейла</div>
+        <div class="card-sub">разбор по цифрам: слева — все покупатели, правее — детализация</div>
+        <div class="tree">
+          <div class="tn root p-root"><div class="tv">8 563</div><div class="tl">покупателей сейла</div></div>
+          <div class="tn bnew g-new conn"><div class="tv">4 996 <small>58%</small></div><div class="tl">Новые — не были клиентами раньше</div></div>
+          <div class="tn bold g-old conn"><div class="tv">3 567 <small>42%</small></div><div class="tl">Уже были нашими клиентами</div></div>
+          <div class="tn leaf lf1 conn"><div class="tv">3 572 <small>42%</small></div><div class="tl">Впервые в компании — именно на этом сейле (сейл привёл)</div></div>
+          <div class="tn leaf lf2 conn"><div class="tv">1 424 <small>17%</small></div><div class="tl">Новые за 2026 — первая покупка была раньше в году</div></div>
+          <div class="tn leaf lf3 conn"><div class="tv">1 621 <small>19%</small></div><div class="tl">Реактивированные — спали и вернулись через сейл</div></div>
+          <div class="tn leaf lf4 conn"><div class="tv">1 946 <small>23%</small></div><div class="tl">Лояльные / активные — покупают и вне сейла</div></div>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:14px;align-items:start">
+        <div class="card">
+          <div class="card-title">Из кого состоят покупатели сейла</div>
+          <div class="donut-wrap">
+            <svg id="cliDonut" viewBox="0 0 100 100" width="120" height="120"></svg>
+            <div class="donut-legend" id="cliLegend" style="min-width:180px"></div>
+          </div>
+          <div style="font-weight:700;font-size:12px;margin:14px 0 8px">По классу клиента (RFM)</div>
+          <div id="cliClassBars"></div>
+          <div class="note">Премиум-ядро A/A+ почти не покупает на сейле (0,7%) — берут вне распродаж.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Тип покупателя (паттерн)</div>
+          <div class="card-sub">по паттерну покупок — отдельный срез от статуса выше</div>
+          <div id="cliStatusBars" style="margin-top:10px"></div>
+          <div class="note">«1-я покупка — этот сейл» (42%) — это те, кого сейл привёл впервые; входит в «новых» (58%). Остальные новые сделали первую покупку раньше в 2026.</div>
+          <div class="card dark-card" style="padding:13px;margin-top:14px"><div style="font-size:10.5px;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:4px">СОСТАВ ПОКУПАТЕЛЕЙ СЕЙЛА</div><div style="font-size:12px;font-weight:600;line-height:1.55;color:rgba(255,255,255,.92)">Из 8 563 купивших: <span style="color:#F97316;font-weight:800">58% — новые</span>, 23% — лояльные (покупают и вне сейла), <span style="color:#F97316;font-weight:800">19% — реактивированные</span> (спящие вернулись через сейл).</div></div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:12px;background:#FFF0E6;border:1px solid #F7C9A8;border-radius:12px;padding:11px 14px;font-size:12px;color:#8a3f13;font-weight:600">🎯 Сейл в первую очередь привлекает новых (58%) и удерживает лояльных (23%); реактивация спящих — 19%. Точечные касания по спящим (SMS −30%, связка −20%→−30%) дают ×2 конверсию — здесь есть куда расти.</div>
     </section>
 
     <!-- ===== 4. ОШИБКИ ===== -->
@@ -564,6 +626,15 @@ hbars('reasonBars',[
  {n:'Размер',v:81.7,c:'#F97316'},{n:'Фасон',v:8.6,c:'#FBBF24'},
  {n:'Отмена',v:4.7,c:'#94A3B8'},{n:'Стиль',v:1.9,c:'#94A3B8'},
  {n:'Вина магазина',v:1.3,c:'#EF4444'},{n:'Цвет',v:1.2,c:'#94A3B8'}
+],v=>v.toFixed(1)+'%');
+donut('cliDonut','cliLegend',[
+ {n:'Новые клиенты',v:58.3,c:'#F97316'},{n:'Лояльные (активные)',v:22.7,c:'#1A1A1A'},{n:'Реактивированные (спящие)',v:18.9,c:'#eda100'}
+],v=>v.toFixed(1)+'%');
+hbars('cliClassBars',[
+ {n:'C',v:81.5,c:'#94A3B8'},{n:'B',v:17.9,c:'#F97316'},{n:'A',v:0.6,c:'#1A1A1A'},{n:'A+',v:0.1,c:'#eda100'}
+],v=>v.toFixed(1)+'%');
+hbars('cliStatusBars',[
+ {n:'В разные сезоны',v:43.9,c:'#F97316'},{n:'1-я покупка — сейл',v:41.7,c:'#FBBF24'},{n:'Только на Sale',v:14.4,c:'#EF4444'}
 ],v=>v.toFixed(1)+'%');
 donut('catDonut','catLegend',[
  {n:'Верха',v:85.5,c:'#F97316'},{n:'Низы',v:7.8,c:'#1A1A1A'},{n:'Прочее',v:3.5,c:'#94A3B8'},{n:'Детское',v:3.3,c:'#34D399'}
